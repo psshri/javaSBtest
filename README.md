@@ -1,0 +1,1 @@
+[![CI with Gradle](https://github.com/psshri/javaSBtest/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/psshri/javaSBtest/actions/workflows/ci.yml)
