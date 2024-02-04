@@ -27,12 +27,12 @@ jobs:
           cache: gradle
 #      - name: Grant execute permission for gradlew
 #        run: chmod +x gradlew
-      - name: Setup Gradle 8.5
+      - name: Gradle build
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '8.5'
           add-job-summary-as-pr-comment: on-failure
-          arguments: build
+          arguments: build --no-daemon
 #      - name: Build with Gradle Wrapper
 #        run: ./gradlew build --no-daemon
       - name: Upload build artifact
