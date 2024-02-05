@@ -1,0 +1,16 @@
+name: Check version difference
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  check-version:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+        with:
+          ref: main
