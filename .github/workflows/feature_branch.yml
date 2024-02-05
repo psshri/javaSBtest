@@ -1,0 +1,64 @@
+name: CI with Gradle (Feature branch)
+
+#on:
+#  push:
+#    branches:
+#      - "*"
+#    paths-ignore:
+#      - 'main/**'
+#  pull_request:
+#    branches: [ "main" ]
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+#      - name: Validate Gradle wrapper
+#        uses: gradle/wrapper-validation-action@v2
+#
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: '17'
+#          distribution: 'adopt'
+#          cache: gradle
+#
+#      - name: Grant execute permission for gradlew
+#        run: chmod +x ./gradlew
+#
+#      - name: Build with Gradle Wrapper
+#        run: ./gradlew build --no-daemon
+#
+#      - name: Load properties from gradle.properties
+#        id: load-properties
+#        run: |
+#          majorVersion=$(grep -E '^majorVersion' gradle.properties | cut -d'=' -f2 | tr -d '[:space:]')
+#          minorVersion=$(grep -E '^minorVersion' gradle.properties | cut -d'=' -f2 | tr -d '[:space:]')
+#          buildVersion=$(grep -E '^buildVersion' gradle.properties | cut -d'=' -f2 | tr -d '[:space:]')
+#          echo "majorVersion=$majorVersion" >> $GITHUB_ENV
+#          echo "minorVersion=$minorVersion" >> $GITHUB_ENV
+#          echo "buildVersion=$buildVersion" >> $GITHUB_ENV
+#
+#      - name: Construct .jar file name
+#        run: echo "jarFileName=backend-${majorVersion}.${minorVersion}.${buildVersion}.jar" >> $GITHUB_ENV
+#
+#      - name: Upload build artifact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: jar-file
+#          path: build/libs/${{ env.jarFileName }}
