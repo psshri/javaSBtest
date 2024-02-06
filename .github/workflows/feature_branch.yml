@@ -10,11 +10,12 @@ name: CI with Gradle (Feature branch)
 #    branches: [ "main" ]
 
 on:
-  push:
-    branches-ignore:
-      - main
+#  push:
+#    branches-ignore:
+#      - main
   pull_request:
     branches: [ "main" ]
+    types: [opened, synchronize]
 
 permissions:
   contents: read
