@@ -70,9 +70,9 @@ jobs:
           echo "the branch is in pr? ${{ env.BRANCH_IN_PR }}"
 
       - name: foo
-          if: steps.inprcheck.outputs.BRANCH_IN_PR != 'true'
-          run: |
-            echo "hi"
+        if: steps.inprcheck.outputs.BRANCH_IN_PR != 'true'
+        run: |
+          echo "hi"
 
 #      - name: Validate Gradle wrapper
 #        uses: gradle/wrapper-validation-action@v2
