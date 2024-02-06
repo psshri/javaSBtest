@@ -10,12 +10,12 @@ name: CI with Gradle (Feature branch)
 #    branches: [ "main" ]
 
 on:
-#  push:
-#    branches-ignore:
-#      - main
+  push:
+    branches-ignore:
+      - main
   pull_request:
     branches: [ "main" ]
-    types: [opened, synchronize]
+    types: [opened, synchronize, closed, reopened]
 
 permissions:
   contents: read
@@ -28,6 +28,11 @@ jobs:
     steps:
 
       - uses: actions/checkout@v4
+      - name: Extract branch name
+        id: extract_branch
+        run: |
+          echo ${GITHUB_REF##*/}
+          echo ::set-output name=BRANCH_NAME::${GITHUB_REF#refs/*/}
 
 #      - name: Validate Gradle wrapper
 #        uses: gradle/wrapper-validation-action@v2
