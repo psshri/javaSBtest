@@ -55,7 +55,7 @@ jobs:
 #          GITHUB_TOKEN: ${{ steps.secrets.outputs.TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_EVENT_NAME: ${{ github.event_name }}
-          BRANCH_NAME: ${{ steps.extract_branch.outputs.BRANCH_NAME }}
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}
 
 #      - name: Validate Gradle wrapper
 #        uses: gradle/wrapper-validation-action@v2
