@@ -60,7 +60,8 @@ jobs:
       - name: Setup Output for Branch in PR
         id: inprcheck
         run: |
-          echo '::set-output name=BRANCH_IN_PR::${{ env.BRANCH_IN_PR }}'
+          echo "BRANCH_IN_PR=${{ env.BRANCH_IN_PR }}" >> $GITHUB_ENV
+#          echo '::set-output name=BRANCH_IN_PR::${{ env.BRANCH_IN_PR }}'
         env:
           BRANCH_IN_PR: ${{ steps.checkbranch.outputs.result }}
 
