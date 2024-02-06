@@ -32,7 +32,12 @@ jobs:
         id: extract_branch
         run: |
           echo ${GITHUB_REF##*/}
-          echo ::set-output name=BRANCH_NAME::${GITHUB_REF#refs/*/}
+          echo "BRANCH_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+#          echo ::set-output name=BRANCH_NAME::${GITHUB_REF#refs/*/}
+
+      - name: Use branch name in another step
+        run: |
+          echo "The branch name is ${{ env.BRANCH_NAME }}"
 
 #      - name: Validate Gradle wrapper
 #        uses: gradle/wrapper-validation-action@v2
