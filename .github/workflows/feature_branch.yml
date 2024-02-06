@@ -15,7 +15,7 @@ on:
 #      - main
   pull_request:
     branches: [ "main" ]
-    types: [opened, synchronize]
+    types: [opened, synchronize, closed, reopened]
 
 permissions:
   contents: read
@@ -28,6 +28,55 @@ jobs:
     steps:
 
       - uses: actions/checkout@v4
+      - name: Extract branch name
+        id: extract_branch
+        run: |
+          echo ${GITHUB_REF##*/}
+          echo "BRANCH_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+#          echo ::set-output name=BRANCH_NAME::${GITHUB_REF#refs/*/}
+
+      - name: Use branch name in another step
+        run: |
+          echo "The branch name is ${{ env.BRANCH_NAME }}"
+
+#      - name: Check if Branch is in PR
+#        if: github.event_name == 'push'
+#        id: checkbranch
+#        uses: actions/github-script@v7
+#        with:
+#          github-token: ${{ env.GITHUB_TOKEN }}
+#          script: |
+#            check_branch_pr = require('./.github/scripts/check_branch_pr.js')
+#            return await check_branch_pr({github, context, core})
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+#          GITHUB_USERNAME: ${{ secrets.USERNAME }}
+##          GITHUB_USERNAME: ${{ steps.secrets.outputs.USERNAME }}
+##          GITHUB_TOKEN: ${{ steps.secrets.outputs.TOKEN }}
+#          GITHUB_ACTOR: ${{ github.actor }}
+#          GITHUB_EVENT_NAME: ${{ github.event_name }}
+#          BRANCH_NAME: ${{ env.BRANCH_NAME }}
+#
+#      - name: Setup Output for Branch in PR
+#        id: inprcheck
+#        run: |
+#          echo "BRANCH_IN_PR=${{ env.BRANCH_IN_PR }}" >> $GITHUB_ENV
+##          echo '::set-output name=BRANCH_IN_PR::${{ env.BRANCH_IN_PR }}'
+#        env:
+#          BRANCH_IN_PR: ${{ steps.checkbranch.outputs.result }}
+#
+#      - name: branch in pr?
+#        run: |
+#          echo "the branch is in pr? ${{ env.BRANCH_IN_PR }}"
+#
+#      - name: foo
+#        if: steps.inprcheck.outputs.BRANCH_IN_PR == 'true'
+#        run: |
+#          echo "hi"
+#
+#      - name: test
+#        run: |
+#          echo ${{ github.event_name }}
 
 #      - name: Validate Gradle wrapper
 #        uses: gradle/wrapper-validation-action@v2
