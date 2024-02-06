@@ -57,6 +57,13 @@ jobs:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           BRANCH_NAME: ${{ env.BRANCH_NAME }}
 
+      - name: Setup Output for Branch in PR
+        id: inprcheck
+        run: |
+          echo '::set-output name=BRANCH_IN_PR::${{ env.BRANCH_IN_PR }}'
+        env:
+          BRANCH_IN_PR: ${{ steps.checkbranch.outputs.result }}
+
 #      - name: Validate Gradle wrapper
 #        uses: gradle/wrapper-validation-action@v2
 #
